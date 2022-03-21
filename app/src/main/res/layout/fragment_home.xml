@@ -45,14 +45,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:tintMode="@color/white" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/img_no_notes"
-        android:id="@+id/btn_detail"
-        android:text="Go to Detail fragment"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:background="@color/light_gray"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

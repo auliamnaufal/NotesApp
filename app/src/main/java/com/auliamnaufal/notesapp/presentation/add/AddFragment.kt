@@ -49,8 +49,6 @@ class AddFragment : Fragment() {
         val item = menu.findItem(R.id.menu_save)
         item.actionView.findViewById<AppCompatImageButton>(R.id.btn_save).setOnClickListener {
             insertNote()
-            findNavController().navigate(R.id.action_addFragment_to_homeFragment)
-            Toast.makeText(context, "Successfully Add Note", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -63,14 +61,30 @@ class AddFragment : Fragment() {
             val date = SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(calendar)
             val priority = spinnerPriorities.selectedItem.toString()
 
-            val data = Notes(
-                0,
-                title,
-                description,
-                date,
-                parseToPriority(priority)
-            )
-            addViewModel.insertNotes(data)
+            if (edtTitle.text.isEmpty() || edtDescription.text.isEmpty()) {
+                when {
+                    edtTitle.text.isEmpty() -> edtTitle.error = "Please fill this field"
+                    edtDescription.text.isEmpty() -> edtDescription.error = "Please fill this field"
+                    else -> {
+                        edtTitle.error = "Please fill this field"
+                        edtDescription.error = "Please fill this field"
+                    }
+                }
+
+            } else {
+                val data = Notes(
+                    0,
+                    title,
+                    description,
+                    date,
+                    parseToPriority(priority)
+                )
+
+                addViewModel.insertNotes(data)
+                findNavController().navigate(R.id.action_addFragment_to_homeFragment)
+                Toast.makeText(context, "Successfully Add Note", Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
 
